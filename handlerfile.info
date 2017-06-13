@@ -1,0 +1,6 @@
+name = handlerfile
+description = Handler Views modify file field.
+core = 7.x
+package = Views
+files[] = handlerfile.module
+files[] = handlers/handlerfile_handler_file.inc
