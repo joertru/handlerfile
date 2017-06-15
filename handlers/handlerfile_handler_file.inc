@@ -23,6 +23,7 @@ class handlerfile_handler_file extends views_handler_field_entity {
     parent::options_form($form, $form_state);
     
     $img_styles =image_styles();
+    $options[''] = 'Ninguno';
     foreach($img_styles as $key => $style){
       $options[$key] = $style['label'];
     }
@@ -71,7 +72,11 @@ class handlerfile_handler_file extends views_handler_field_entity {
     $delta = $this->options['field_delta'];
     $fid = $values->{$campo}[$delta]['raw']['fid'];
     $uri = $values->{$campo}[$delta]['raw']['uri'];
-    $img = image_style_url($this->options['img_styles'], $uri);
+    if(!empty($this->options['img_styles'])){
+	  $img = image_style_url($this->options['img_styles'], $uri);	
+	} else {
+	  $img = file_create_url($uri);
+	}
     return format_string('<img src="@img" class="img-responsive" />', array('@img' => $img ));
   }
   
